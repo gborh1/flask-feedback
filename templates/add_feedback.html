@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Add Feedback{% endblock %}
+{% block content %}
+
+<h1 class="display-4">Add Feedback</h1>
+
+
+
+<div class="row">
+    <form class='col-4' method="POST">
+
+        {{ form.hidden_tag() }}
+
+        {% for field in form
+        if field.widget.input_type != 'hidden' %}
+
+        <div class="form-group">
+            {{field.label}}
+            {{field(class_="form-control")}}
+            {% for err in field.errors %}
+            <small class="form-text text-danger">
+                {{err}}
+            </small>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <button class="btn btn-success" type="submit">Post feedback</button>
+    </form>
+</div>
+
+
+
+{% endblock %}

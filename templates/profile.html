@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+
+<h1 class="display-4">User Profile</h1>
+
+
+
+<div>
+    <h4>{{user.first_name}} {{user.last_name}} <form
+            style="display:inline;"
+            action="/users/{{user.username}}/delete"
+            method="POST">
+            <button class="btn btn-sm
+                btn-danger">Delete</button></h4>
+    </form>
+</div>
+<div>
+    Email: {{user.email}}
+</div>
+<div>
+    User Name {{user.username}}
+</div>
+
+<div>
+    <h1 class="pt-4">Feedback <a class="btn btn-sm
+            btn-info"
+            href="/users/{{user.username}}/feeback/add"
+            role="button">Add</a></h1>
+
+</div>
+
+
+<div class=row>
+
+    <div class="col-5">
+        {% for f in feedback %}
+        <div class="card my-4"
+            style="border-radius: 30px">
+
+            <div class="card-body">
+                <span><h5 class="card-title">@{{f.username}}
+                        {% if session['username']== f.username or
+                        user.is_admin%}
+
+                        <a class="btn btn-sm btn-warning"
+                            href="/feedback/{{f.id}}/update" role="button">Edit</a>
+                        <form style="display:inline;"
+                            action="/feedback/{{f.id}}/delete"
+                            method="POST">
+                            <button class="btn btn-sm
+                                btn-danger">Delete</button>
+                        </form>
+
+                        {% endif %}
+                    </h5></span>
+
+                <h6 class="card-subtitle mb-2 text-muted">{{f.title}}</h6>
+
+                <p class="card-text text-info">{{f.content}}</p>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+
+
+
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<h1 class="display-4">Log In</h1>
+<p class="lead">Welcome! Please log in.</p>
+
+<div class="row">
+    <form class='col-4' method="POST">
+
+        {{ form.hidden_tag() }}
+
+        {% for field in form
+        if field.widget.input_type != 'hidden' %}
+
+        <div class="form-group">
+            {{field.label}}
+            {{field(class_="form-control")}}
+            {% for err in field.errors %}
+            <small class="form-text text-danger">
+                {{err}}
+            </small>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <div class="d-flex justify-content-end mb-3">
+            <a href="/check-email">Forgot Password? </a>
+        </div>
+
+
+        <button class="btn btn-success" type="submit">Login</button>
+
+    </form>
+</div>
+
+{% endblock %}

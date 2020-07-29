@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Email Check{% endblock %}
+{% block content %}
+
+<h1 class="display-4">Change Password</h1>
+<p class="lead">Imput your email to reset your password</p>
+
+<div class="row">
+    <form class='col-4' method="POST">
+
+        {{ form.hidden_tag() }}
+
+        {% for field in form
+        if field.widget.input_type != 'hidden' %}
+
+        <div class="form-group">
+            {{field.label}}
+            {{field(class_="form-control")}}
+            {% for err in field.errors %}
+            <small class="form-text text-danger">
+                {{err}}
+            </small>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+
+        <button class="btn btn-success" type="submit">Submit</button>
+
+    </form>
+</div>
+
+{% endblock %}

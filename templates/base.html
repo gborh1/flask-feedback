@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+            href="https://bootswatch.com/4/united/bootstrap.min.css">
+        <title>{% block title %}{% endblock%}</title>
+    </head>
+    <body>
+        <div class="navbar navbar-dark bg-info">
+            <div class="navbar-container">
+                <div class="navbar-brand"><a class="text-white" href="/">Ultra
+                        Secure
+                        App</a></div>
+            </div>
+
+            <ul class="nav navbar-nav flex-row float-right">
+                {% if 'username' not in session %}
+                <li class="nav-item">
+                    <a class="nav-link pr-5 text-light" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link pr-5 text-light" href="/register">Sign Up</a>
+                </li>
+
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link pr-5 text-light" href="/logout">Logout</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-4 d-flex align-items-center">
+                    <main id="content" class="">
+                        {% with messages =
+                        get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                        {% for category,msg in messages %}
+                        <section class="alert alert-{{category}}">
+                            <p>{{msg}}</p>
+                        </section>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </main>
+
+                </div>
+            </div>
+            {% block content %} {% endblock %}
+
+
+        </div>
+
+
+        <script src="https://unpkg.com/jquery"></script>
+        <script src="https://unpkg.com/popper"></script>
+        <script src="https://unpkg.com/bootstrap"></script>
+        <script src="/static/app.js"></script>
+        <script
+            src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    </body>
+</html>
